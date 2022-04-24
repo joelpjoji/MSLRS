@@ -1087,13 +1087,18 @@ button.vjs-play-control.vjs-control.vjs-button {
 
 
 
-
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+  } 
+body {
+  top: 0px !important; 
+  }
 
 .goog-logo-link {
   display:none !important;
 } 
   
-.goog-te-gadget{
+.goog-te-gadget  {
   color: transparent !important;
 }
 
