@@ -885,6 +885,15 @@ video {
   align-items: center;
 }
 
+.video-js .vjs-mute-control, .video-js .vjs-volume-menu-button  {
+  display: none;
+}
+.video-js .vjs-control-text {
+  display: none;
+}
+.vjs-playback-rate .vjs-playback-rate-value{
+  display: none;
+}
 .vjs-poster {
   background-size: 150%;
 }
