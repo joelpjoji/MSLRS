@@ -1,4 +1,3 @@
-/ Core assets
 let coreAssets = [];
 
 // On install, cache core assets
