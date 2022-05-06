@@ -5,7 +5,7 @@
     <title translate="no">MSLRS | App</title>
     <script src="./eel.js" type="text/javascript"></script>
     <script type="text/javascript" src="/ml2en.js"></script>
-    <script src='/sql-wasm.js'></script>
+    <script src="/sql-wasm.js"></script>
 
     <link rel="icon" href="assets/img/titlelogo.png" type="image/x-icon" />
 
@@ -22,29 +22,31 @@
     <script type="text/javascript">
       // eel.waitForStart()
       // stores previous gesture label
-      var pre = ''
+      var pre = "";
       // contains entire string in the form of array of words/strings
-      var str = []
+      var str = [];
       // current word
-      var word = ''
+      var word = "";
       // variable to check if dictionary DB has been fetched
-      var dbLoaded = false
+      var dbLoaded = false;
       // variable to store DB
       var db;
 
       // function to asynchronously fetch DB
-      async function loadDB(){
-        try{
-          const buf = await fetch("http://localhost:8000/dictionary.sqlite").then(res => res.arrayBuffer());
-          dbLoaded = true
-          initSqlJs().then(function(SQL){
+      async function loadDB() {
+        try {
+          const buf = await fetch(
+            "http://localhost:8000/dictionary.sqlite"
+          ).then((res) => res.arrayBuffer());
+          dbLoaded = true;
+          initSqlJs().then(function (SQL) {
             db = new SQL.Database(new Uint8Array(buf));
-          })
-        } catch(error) {
-          console.log(error)
+          });
+        } catch (error) {
+          console.log(error);
         }
       }
-      
+
       // fetch DB
       loadDB();
 
@@ -59,18 +61,18 @@
           // Prepare query statement
           var stmt = db.prepare(query);
           // execute query
-          while(stmt.step()) {
+          while (stmt.step()) {
             // get each row of result
             var row = stmt.getAsObject();
             // console.log(row['entry']);
-            preds.push(row['entry']);
+            preds.push(row["entry"]);
           }
           // if there is only one prediction
           if (preds.length == 1) {
             //push prediction to str
             str.push(preds[0]);
             //reset word
-            word = ''
+            word = "";
           }
           removeBtns();
           setupBtns(preds);
@@ -80,73 +82,72 @@
       // mapping from index to alphabet
       const map1 = new Map();
 
-      map1.set(00, '\u0D05');
-      map1.set(01, '\u0D06');
-      map1.set(02, '\u0D07');
-      map1.set(03, '\u0D08');
-      map1.set(04, '\u0D09');
-      map1.set(05, '\u0D0A');
-      map1.set(06, '\u0D0B');
-      map1.set(07, '\u0D0E');
-      map1.set(08, '\u0D0F');
-      map1.set(09, '\u0D10');
-      map1.set(10, '\u0D12');
-      map1.set(11, '\u0D13');
-      map1.set(12, '\u0D14');
-      map1.set(13, '\u0D02');
-      map1.set(14, '\u0D03');
-      map1.set(15, '\u0D2A');
-      map1.set(16, '\u0D2B');
-      map1.set(17, '\u0D2C');
-      map1.set(18, '\u0D2D');
-      map1.set(19, '\u0D2E');
-      map1.set(20, '\u0D2F');
-      map1.set(21, '\u0D30');
-      map1.set(22, '\u0D32');
-      map1.set(23, '\u0D35');
-      map1.set(24, '\u0D36');
-      map1.set(25, '\u0D37');
-      map1.set(26, '\u0D38');
-      map1.set(27, '\u0D39');
-      map1.set(28, '\u0D33');
-      map1.set(29, '\u0D31');
-      map1.set(30, '\u0D34');
-      map1.set(31, '\u0D7E');
-      map1.set(32, '\u0D7B');
-      map1.set(33, '\u0D7C');
-      map1.set(34, '\u0D7D');
-      map1.set(35, '\u0D7A');
-      map1.set(36, '\u0D41');
-      map1.set(37, '\u0D42');
-      map1.set(38, '\u0D3F');
-      map1.set(39, '\u0D40');
-      map1.set(40, '\u0D4D');
-      map1.set(41, '\u0D3D');
-      map1.set(42, '\u0D3A');
-      map1.set(43, '\u0D15');
-      map1.set(44, '\u0D16');
-      map1.set(45, '\u0D18');
-      map1.set(46, '\u0D17');
-      map1.set(47, '\u0D19');
-      map1.set(48, '\u0D1A');
-      map1.set(49, '\u0D1B');
-      map1.set(50, '\u0D1C');
-      map1.set(51, '\u0D1D');
-      map1.set(52, '\u0D1E');
-      map1.set(53, '\u0D1F');
-      map1.set(54, '\u0D20');
-      map1.set(55, '\u0D21');
-      map1.set(56, '\u0D22');
-      map1.set(57, '\u0D23');
-      map1.set(58, '\u0D24');
-      map1.set(59, '\u0D25');
-      map1.set(60, '\u0D26');
-      map1.set(61, '\u0D27');
-      map1.set(62, '\u0D28');
+      map1.set(00, "\u0D05");
+      map1.set(01, "\u0D06");
+      map1.set(02, "\u0D07");
+      map1.set(03, "\u0D08");
+      map1.set(04, "\u0D09");
+      map1.set(05, "\u0D0A");
+      map1.set(06, "\u0D0B");
+      map1.set(07, "\u0D0E");
+      map1.set(08, "\u0D0F");
+      map1.set(09, "\u0D10");
+      map1.set(10, "\u0D12");
+      map1.set(11, "\u0D13");
+      map1.set(12, "\u0D14");
+      map1.set(13, "\u0D02");
+      map1.set(14, "\u0D03");
+      map1.set(15, "\u0D2A");
+      map1.set(16, "\u0D2B");
+      map1.set(17, "\u0D2C");
+      map1.set(18, "\u0D2D");
+      map1.set(19, "\u0D2E");
+      map1.set(20, "\u0D2F");
+      map1.set(21, "\u0D30");
+      map1.set(22, "\u0D32");
+      map1.set(23, "\u0D35");
+      map1.set(24, "\u0D36");
+      map1.set(25, "\u0D37");
+      map1.set(26, "\u0D38");
+      map1.set(27, "\u0D39");
+      map1.set(28, "\u0D33");
+      map1.set(29, "\u0D31");
+      map1.set(30, "\u0D34");
+      map1.set(31, "\u0D7E");
+      map1.set(32, "\u0D7B");
+      map1.set(33, "\u0D7C");
+      map1.set(34, "\u0D7D");
+      map1.set(35, "\u0D7A");
+      map1.set(36, "\u0D41");
+      map1.set(37, "\u0D42");
+      map1.set(38, "\u0D3F");
+      map1.set(39, "\u0D40");
+      map1.set(40, "\u0D4D");
+      map1.set(41, "\u0D3D");
+      map1.set(42, "\u0D3A");
+      map1.set(43, "\u0D15");
+      map1.set(44, "\u0D16");
+      map1.set(45, "\u0D18");
+      map1.set(46, "\u0D17");
+      map1.set(47, "\u0D19");
+      map1.set(48, "\u0D1A");
+      map1.set(49, "\u0D1B");
+      map1.set(50, "\u0D1C");
+      map1.set(51, "\u0D1D");
+      map1.set(52, "\u0D1E");
+      map1.set(53, "\u0D1F");
+      map1.set(54, "\u0D20");
+      map1.set(55, "\u0D21");
+      map1.set(56, "\u0D22");
+      map1.set(57, "\u0D23");
+      map1.set(58, "\u0D24");
+      map1.set(59, "\u0D25");
+      map1.set(60, "\u0D26");
+      map1.set(61, "\u0D27");
+      map1.set(62, "\u0D28");
     </script>
   </head>
   <body>
-
     <!-- partial:index.partial.html -->
     <div class="container">
       <div class="sidebar">
@@ -201,22 +202,32 @@
       <div class="wrapper">
         <div class="header">
           <div translate="no" class="search-bar">
-            <input translate="no" type="text" placeholder="Search" id="searchbar"/>
+            <input
+              translate="no"
+              type="text"
+              placeholder="Search"
+              id="searchbar"
+            />
           </div>
         </div>
 
         <div class="main-container">
-
-
-
           <div class="stream-area">
-            <div translate="no" class="video-stream ">
+            <div translate="no" class="video-stream">
               <div class="camera-feed">
-            <img src="https://media4.giphy.com/media/xTkcEQACH24SMPxIQg/giphy.gif?" id="wimg" alt="" height="480px" width="640px"
-class="anim" style="min-height: 480px; min-width: 640px;">
-          </div>
-          
-        <!-- <video
+                <img
+                  src="https://media4.giphy.com/media/xTkcEQACH24SMPxIQg/giphy.gif?"
+                  id="wimg"
+                  alt=""
+                  height="480px"
+                  width="640px"
+                  class="anim"
+                  style="min-height: 480px; min-width: 640px; border-radius: 20px;"
+                  
+                />
+              </div>
+
+              <!-- <video
           id="wimg"
           class="video-js  input_video anim"
           width="1280px"
@@ -227,11 +238,20 @@ class="anim" style="min-height: 480px; min-width: 640px;">
           data-setup='{ "aspectRatio":"940:620", "playbackRates": [1, 1.5, 2] }'
         >
         </video> -->
-
+              <div
+                style="display: flex; justify-content: center; padding: 15px"
+                class="anim"
+              >
+                <button
+                  translate="no"
+                  href="#"
+                  id="startstop"
+                  class="button button2"
+                >
+                  Start
+                </button>
+              </div>
             </div>
-
-
-
 
             <div class="chat-stream anim">
               <div class="chat">
@@ -260,18 +280,35 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                       <!-- <div translate="yes" class="msg__content video-p-sub">
                         This is dummy Text
                       </div> -->
-                      <textarea id="w3" class="msg__content video-p-sub" rows="5" cols="50"></textarea>
-
+                      <textarea
+                        translate="yes"
+                        id="w3"
+                        style="resize: none"
+                        class="msg__content video-p-sub"
+                        rows="5"
+                        cols="50"
+                      ></textarea>
                     </div>
                   </div>
                   <div class="complete-content" id="auto"></div>
-
                 </div>
                 <div class="wrap">
-                  <div><button href="#" id="startstop" class="button button2">Start</button></div>
-                  <div><button href="#" id="clearall" class="button button2">Clear</button></div>
+                  <div>
+                    <button
+                      translate="no"
+                      href="#"
+                      id="clearall"
+                      class="button button2"
+                    >
+                      Clear
+                    </button>
+                  </div>
                   <div style="flex-direction: row">
-                    <div><a href="#" class="button button2">Translate</a></div>
+                    <div>
+                      <a translate="no" href="#" class="button button2"
+                        >Translate</a
+                      >
+                    </div>
                     <div id="google_translate_element"></div>
                   </div>
                 </div>
@@ -294,15 +331,10 @@ class="anim" style="min-height: 480px; min-width: 640px;">
             </div>
           </div>
 
-
-
-
-          
           <div translate="no" class="main-header anim" style="--delay: 0s">
             Signs
           </div>
 
-         
           <div translate="no" class="small-header anim" style="--delay: 0.3s">
             Independent Vowels:
           </div>
@@ -312,11 +344,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436572488.sd.mp4?s=eae5fb490e214deb9ff532dd98d101efe94e7a8b&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">അ</main>
+                <main style="font-size: 30px">അ</main>
               </div>
               <div class="video-name">Pronounced as :`[a]</div>
             </div>
@@ -325,11 +358,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/449972745.sd.mp4?s=9943177fe8a6147b7bc4598259401f06ec57878a&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">ആ</main>
+                <main style="font-size: 30px">ആ</main>
               </div>
               <div class="video-name">Pronounced as :`[aa]</div>
             </div>
@@ -338,11 +372,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436553499.sd.mp4?s=0e44527f269278743db448761e35c5e39cfaa52c&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">ഇ</main>
+                <main style="font-size: 30px">ഇ</main>
               </div>
               <div class="video-name">Pronounced as :`[i]</div>
             </div>
@@ -351,11 +386,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/361861493.sd.mp4?s=19d8275ca755d653042a87ef28b2f0b2eabf57d0&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">ഈ</main>
+                <main style="font-size: 30px">ഈ</main>
               </div>
               <div class="video-name">Pronounced as :`[ii]</div>
             </div>
@@ -367,11 +403,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436572488.sd.mp4?s=eae5fb490e214deb9ff532dd98d101efe94e7a8b&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">ഉ</main>
+                <main style="font-size: 30px">ഉ</main>
               </div>
               <div class="video-name">Pronounced as :`[u]</div>
             </div>
@@ -380,11 +417,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/449972745.sd.mp4?s=9943177fe8a6147b7bc4598259401f06ec57878a&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">ഉ</main>
+                <main style="font-size: 30px">ഉ</main>
               </div>
               <div class="video-name">Pronounced as :`[uu]</div>
             </div>
@@ -393,11 +431,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436553499.sd.mp4?s=0e44527f269278743db448761e35c5e39cfaa52c&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">ഋ</main>
+                <main style="font-size: 30px">ഋ</main>
               </div>
               <div class="video-name">Pronounced as :`[r]</div>
             </div>
@@ -406,11 +445,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/361861493.sd.mp4?s=19d8275ca755d653042a87ef28b2f0b2eabf57d0&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">ൠ</main>
+                <main style="font-size: 30px">ൠ</main>
               </div>
               <div class="video-name">Pronounced as :`[rr]</div>
             </div>
@@ -422,11 +462,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436572488.sd.mp4?s=eae5fb490e214deb9ff532dd98d101efe94e7a8b&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">എ</main>
+                <main style="font-size: 30px">എ</main>
               </div>
               <div class="video-name">Pronounced as :`[e]</div>
             </div>
@@ -435,11 +476,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/449972745.sd.mp4?s=9943177fe8a6147b7bc4598259401f06ec57878a&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">ഏ</main>
+                <main style="font-size: 30px">ഏ</main>
               </div>
               <div class="video-name">Pronounced as :`[ee]</div>
             </div>
@@ -448,11 +490,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436553499.sd.mp4?s=0e44527f269278743db448761e35c5e39cfaa52c&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">ഒ</main>
+                <main style="font-size: 30px">ഒ</main>
               </div>
               <div class="video-name">Pronounced as :`[o]</div>
             </div>
@@ -461,11 +504,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/361861493.sd.mp4?s=19d8275ca755d653042a87ef28b2f0b2eabf57d0&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">ഓ</main>
+                <main style="font-size: 30px">ഓ</main>
               </div>
               <div class="video-name">Pronounced as :`[oo]</div>
             </div>
@@ -477,11 +521,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436572488.sd.mp4?s=eae5fb490e214deb9ff532dd98d101efe94e7a8b&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">ഐ</main>
+                <main style="font-size: 30px">ഐ</main>
               </div>
               <div class="video-name">Pronounced as :`[ai]</div>
             </div>
@@ -490,11 +535,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/449972745.sd.mp4?s=9943177fe8a6147b7bc4598259401f06ec57878a&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">ഔ</main>
+                <main style="font-size: 30px">ഔ</main>
               </div>
               <div class="video-name">Pronounced as :`[au]</div>
             </div>
@@ -503,11 +549,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436553499.sd.mp4?s=0e44527f269278743db448761e35c5e39cfaa52c&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">അ</main>
+                <main style="font-size: 30px">അ</main>
               </div>
               <div class="video-name">Pronounced as :`[m]</div>
             </div>
@@ -516,11 +563,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/361861493.sd.mp4?s=19d8275ca755d653042a87ef28b2f0b2eabf57d0&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">അ</main>
+                <main style="font-size: 30px">അ</main>
               </div>
               <div class="video-name">Pronounced as :`[m]</div>
             </div>
@@ -536,11 +584,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436572488.sd.mp4?s=eae5fb490e214deb9ff532dd98d101efe94e7a8b&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">ാ</main>
+                <main style="font-size: 30px">ാ</main>
               </div>
               <div class="video-name">Pronounced as :`[aa]</div>
             </div>
@@ -549,11 +598,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/449972745.sd.mp4?s=9943177fe8a6147b7bc4598259401f06ec57878a&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">ി</main>
+                <main style="font-size: 30px">ി</main>
               </div>
               <div class="video-name">Pronounced as :`[i]</div>
             </div>
@@ -562,11 +612,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436553499.sd.mp4?s=0e44527f269278743db448761e35c5e39cfaa52c&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">ീ</main>
+                <main style="font-size: 30px">ീ</main>
               </div>
               <div class="video-name">Pronounced as :`[ii]</div>
             </div>
@@ -575,11 +626,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/361861493.sd.mp4?s=19d8275ca755d653042a87ef28b2f0b2eabf57d0&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">ു</main>
+                <main style="font-size: 30px">ു</main>
               </div>
               <div class="video-name">Pronounced as :`[u]</div>
             </div>
@@ -591,11 +643,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436572488.sd.mp4?s=eae5fb490e214deb9ff532dd98d101efe94e7a8b&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">ൂ</main>
+                <main style="font-size: 30px">ൂ</main>
               </div>
               <div class="video-name">Pronounced as :`[uu]</div>
             </div>
@@ -604,12 +657,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/449972745.sd.mp4?s=9943177fe8a6147b7bc4598259401f06ec57878a&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">ൃ
-                </main>
+                <main style="font-size: 30px">ൃ</main>
               </div>
               <div class="video-name">Pronounced as :`[r]</div>
             </div>
@@ -618,11 +671,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436553499.sd.mp4?s=0e44527f269278743db448761e35c5e39cfaa52c&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">ൄ</main>
+                <main style="font-size: 30px">ൄ</main>
               </div>
               <div class="video-name">Pronounced as :`[rr]</div>
             </div>
@@ -631,11 +685,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/361861493.sd.mp4?s=19d8275ca755d653042a87ef28b2f0b2eabf57d0&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">അ</main>
+                <main style="font-size: 30px">അ</main>
               </div>
               <div class="video-name">Pronounced as :`[m]</div>
             </div>
@@ -651,11 +706,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436572488.sd.mp4?s=eae5fb490e214deb9ff532dd98d101efe94e7a8b&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">ക</main>
+                <main style="font-size: 30px">ക</main>
               </div>
               <div class="video-name">Pronounced as :`[ka]</div>
             </div>
@@ -664,11 +720,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/449972745.sd.mp4?s=9943177fe8a6147b7bc4598259401f06ec57878a&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">ഖ</main>
+                <main style="font-size: 30px">ഖ</main>
               </div>
               <div class="video-name">Pronounced as :`[kha]</div>
             </div>
@@ -677,11 +734,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436553499.sd.mp4?s=0e44527f269278743db448761e35c5e39cfaa52c&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">ഗ</main>
+                <main style="font-size: 30px">ഗ</main>
               </div>
               <div class="video-name">Pronounced as :`[ga]</div>
             </div>
@@ -690,11 +748,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/361861493.sd.mp4?s=19d8275ca755d653042a87ef28b2f0b2eabf57d0&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">ഘ</main>
+                <main style="font-size: 30px">ഘ</main>
               </div>
               <div class="video-name">Pronounced as :`[gha]</div>
             </div>
@@ -706,11 +765,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436572488.sd.mp4?s=eae5fb490e214deb9ff532dd98d101efe94e7a8b&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">ങ</main>
+                <main style="font-size: 30px">ങ</main>
               </div>
               <div class="video-name">Pronounced as :`[nga]</div>
             </div>
@@ -719,11 +779,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/449972745.sd.mp4?s=9943177fe8a6147b7bc4598259401f06ec57878a&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">ച</main>
+                <main style="font-size: 30px">ച</main>
               </div>
               <div class="video-name">Pronounced as :`[ca]</div>
             </div>
@@ -732,11 +793,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436553499.sd.mp4?s=0e44527f269278743db448761e35c5e39cfaa52c&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">ഛ</main>
+                <main style="font-size: 30px">ഛ</main>
               </div>
               <div class="video-name">Pronounced as :`[cha]</div>
             </div>
@@ -745,11 +807,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/361861493.sd.mp4?s=19d8275ca755d653042a87ef28b2f0b2eabf57d0&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">ജ</main>
+                <main style="font-size: 30px">ജ</main>
               </div>
               <div class="video-name">Pronounced as :`[ja]</div>
             </div>
@@ -761,11 +824,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436572488.sd.mp4?s=eae5fb490e214deb9ff532dd98d101efe94e7a8b&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">ഝ</main>
+                <main style="font-size: 30px">ഝ</main>
               </div>
               <div class="video-name">Pronounced as :`[jha]</div>
             </div>
@@ -774,11 +838,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/449972745.sd.mp4?s=9943177fe8a6147b7bc4598259401f06ec57878a&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">ഞ</main>
+                <main style="font-size: 30px">ഞ</main>
               </div>
               <div class="video-name">Pronounced as :`[nya]</div>
             </div>
@@ -787,11 +852,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436553499.sd.mp4?s=0e44527f269278743db448761e35c5e39cfaa52c&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">ട</main>
+                <main style="font-size: 30px">ട</main>
               </div>
               <div class="video-name">Pronounced as :`[ta]</div>
             </div>
@@ -800,11 +866,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/361861493.sd.mp4?s=19d8275ca755d653042a87ef28b2f0b2eabf57d0&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">ഠ</main>
+                <main style="font-size: 30px">ഠ</main>
               </div>
               <div class="video-name">Pronounced as :`[ttha]</div>
             </div>
@@ -816,11 +883,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436572488.sd.mp4?s=eae5fb490e214deb9ff532dd98d101efe94e7a8b&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">ഡ</main>
+                <main style="font-size: 30px">ഡ</main>
               </div>
               <div class="video-name">Pronounced as :`[dda]</div>
             </div>
@@ -829,11 +897,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/449972745.sd.mp4?s=9943177fe8a6147b7bc4598259401f06ec57878a&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">ഢ</main>
+                <main style="font-size: 30px">ഢ</main>
               </div>
               <div class="video-name">Pronounced as :`[ddha]</div>
             </div>
@@ -842,11 +911,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436553499.sd.mp4?s=0e44527f269278743db448761e35c5e39cfaa52c&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">ണ</main>
+                <main style="font-size: 30px">ണ</main>
               </div>
               <div class="video-name">Pronounced as :`[nna]</div>
             </div>
@@ -855,11 +925,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/361861493.sd.mp4?s=19d8275ca755d653042a87ef28b2f0b2eabf57d0&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">ത</main>
+                <main style="font-size: 30px">ത</main>
               </div>
               <div class="video-name">Pronounced as :`[ta]</div>
             </div>
@@ -871,11 +942,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436572488.sd.mp4?s=eae5fb490e214deb9ff532dd98d101efe94e7a8b&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">ഥ</main>
+                <main style="font-size: 30px">ഥ</main>
               </div>
               <div class="video-name">Pronounced as :`[tha]</div>
             </div>
@@ -884,11 +956,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/449972745.sd.mp4?s=9943177fe8a6147b7bc4598259401f06ec57878a&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">ദ</main>
+                <main style="font-size: 30px">ദ</main>
               </div>
               <div class="video-name">Pronounced as :`[da]</div>
             </div>
@@ -897,11 +970,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436553499.sd.mp4?s=0e44527f269278743db448761e35c5e39cfaa52c&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">ധ</main>
+                <main style="font-size: 30px">ധ</main>
               </div>
               <div class="video-name">Pronounced as :`[dha]</div>
             </div>
@@ -910,11 +984,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/361861493.sd.mp4?s=19d8275ca755d653042a87ef28b2f0b2eabf57d0&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">ന</main>
+                <main style="font-size: 30px">ന</main>
               </div>
               <div class="video-name">Pronounced as :`[na]</div>
             </div>
@@ -926,11 +1001,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436572488.sd.mp4?s=eae5fb490e214deb9ff532dd98d101efe94e7a8b&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">ഩ</main>
+                <main style="font-size: 30px">ഩ</main>
               </div>
               <div class="video-name">Pronounced as :`[nna]</div>
             </div>
@@ -939,11 +1015,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/449972745.sd.mp4?s=9943177fe8a6147b7bc4598259401f06ec57878a&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">പ</main>
+                <main style="font-size: 30px">പ</main>
               </div>
               <div class="video-name">Pronounced as :`[pa]</div>
             </div>
@@ -952,11 +1029,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436553499.sd.mp4?s=0e44527f269278743db448761e35c5e39cfaa52c&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">ഫ</main>
+                <main style="font-size: 30px">ഫ</main>
               </div>
               <div class="video-name">Pronounced as :`[pha]</div>
             </div>
@@ -965,11 +1043,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/361861493.sd.mp4?s=19d8275ca755d653042a87ef28b2f0b2eabf57d0&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">ബ</main>
+                <main style="font-size: 30px">ബ</main>
               </div>
               <div class="video-name">Pronounced as :`[ba]</div>
             </div>
@@ -981,11 +1060,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436572488.sd.mp4?s=eae5fb490e214deb9ff532dd98d101efe94e7a8b&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">ഭ</main>
+                <main style="font-size: 30px">ഭ</main>
               </div>
               <div class="video-name">Pronounced as :`[bha]</div>
             </div>
@@ -994,11 +1074,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/449972745.sd.mp4?s=9943177fe8a6147b7bc4598259401f06ec57878a&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">മ</main>
+                <main style="font-size: 30px">മ</main>
               </div>
               <div class="video-name">Pronounced as :`[ma]</div>
             </div>
@@ -1007,11 +1088,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436553499.sd.mp4?s=0e44527f269278743db448761e35c5e39cfaa52c&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">യ</main>
+                <main style="font-size: 30px">യ</main>
               </div>
               <div class="video-name">Pronounced as :`[ya]</div>
             </div>
@@ -1020,11 +1102,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/361861493.sd.mp4?s=19d8275ca755d653042a87ef28b2f0b2eabf57d0&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">ര</main>
+                <main style="font-size: 30px">ര</main>
               </div>
               <div class="video-name">Pronounced as :`[ra]</div>
             </div>
@@ -1036,11 +1119,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436572488.sd.mp4?s=eae5fb490e214deb9ff532dd98d101efe94e7a8b&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">റ</main>
+                <main style="font-size: 30px">റ</main>
               </div>
               <div class="video-name">Pronounced as :`[rra]</div>
             </div>
@@ -1049,11 +1133,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/449972745.sd.mp4?s=9943177fe8a6147b7bc4598259401f06ec57878a&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">ല</main>
+                <main style="font-size: 30px">ല</main>
               </div>
               <div class="video-name">Pronounced as :`[la]</div>
             </div>
@@ -1062,11 +1147,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436553499.sd.mp4?s=0e44527f269278743db448761e35c5e39cfaa52c&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">ള</main>
+                <main style="font-size: 30px">ള</main>
               </div>
               <div class="video-name">Pronounced as :`[lla]</div>
             </div>
@@ -1075,11 +1161,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/361861493.sd.mp4?s=19d8275ca755d653042a87ef28b2f0b2eabf57d0&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">ഴ</main>
+                <main style="font-size: 30px">ഴ</main>
               </div>
               <div class="video-name">Pronounced as :`[llla]</div>
             </div>
@@ -1091,11 +1178,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436572488.sd.mp4?s=eae5fb490e214deb9ff532dd98d101efe94e7a8b&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">വ</main>
+                <main style="font-size: 30px">വ</main>
               </div>
               <div class="video-name">Pronounced as :`[va]</div>
             </div>
@@ -1104,11 +1192,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/449972745.sd.mp4?s=9943177fe8a6147b7bc4598259401f06ec57878a&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">ശ</main>
+                <main style="font-size: 30px">ശ</main>
               </div>
               <div class="video-name">Pronounced as :`[sha]</div>
             </div>
@@ -1117,11 +1206,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436553499.sd.mp4?s=0e44527f269278743db448761e35c5e39cfaa52c&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">ഷ</main>
+                <main style="font-size: 30px">ഷ</main>
               </div>
               <div class="video-name">Pronounced as :`[ssa]</div>
             </div>
@@ -1130,11 +1220,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/361861493.sd.mp4?s=19d8275ca755d653042a87ef28b2f0b2eabf57d0&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">സ</main>
+                <main style="font-size: 30px">സ</main>
               </div>
               <div class="video-name">Pronounced as :`[sa]</div>
             </div>
@@ -1150,11 +1241,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436572488.sd.mp4?s=eae5fb490e214deb9ff532dd98d101efe94e7a8b&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">ഹ</main>
+                <main style="font-size: 30px">ഹ</main>
               </div>
               <div class="video-name">Pronounced as :`[ha]</div>
             </div>
@@ -1163,11 +1255,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/449972745.sd.mp4?s=9943177fe8a6147b7bc4598259401f06ec57878a&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">അ</main>
+                <main style="font-size: 30px">അ</main>
               </div>
               <div class="video-name">Pronounced as :`[m]</div>
             </div>
@@ -1176,11 +1269,12 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/436553499.sd.mp4?s=0e44527f269278743db448761e35c5e39cfaa52c&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by offline">
-                <main style="font-size: 30px;">അ</main>
+                <main style="font-size: 30px">അ</main>
               </div>
               <div class="video-name">Pronounced as :`[m]</div>
             </div>
@@ -1189,25 +1283,17 @@ class="anim" style="min-height: 480px; min-width: 640px;">
                 <video muted="">
                   <source
                     src="https://player.vimeo.com/external/361861493.sd.mp4?s=19d8275ca755d653042a87ef28b2f0b2eabf57d0&profile_id=139&oauth2_token_id=57447761"
-                    type="video/mp4" />
+                    type="video/mp4"
+                  />
                 </video>
               </div>
               <div class="video-by">
-                <main style="font-size: 30px;">അ</main>
+                <main style="font-size: 30px">അ</main>
               </div>
               <div class="video-name">Pronounced as :`[m]</div>
             </div>
           </div>
           <br />
-
-
-
-
-
-
-          
-
-          
         </div>
       </div>
     </div>
@@ -1218,46 +1304,46 @@ class="anim" style="min-height: 480px; min-width: 640px;">
       eel.expose(print_label);
       // obtain predicted gesture index and probability as json
       function print_label(x) {
-        x = JSON.parse(x)
+        x = JSON.parse(x);
         // obtain unicode malayalam alphabet
-        s = map1.get(parseInt(x.label))
+        s = map1.get(parseInt(x.label));
         if (s == " ") {
           // if so push word into str and reset word
-          str.push(word)
-          word = ''
+          str.push(word);
+          word = "";
         } else {
-          var cnt = cMap.get(s)
-          if (cnt == undefined ) {
+          var cnt = cMap.get(s);
+          if (cnt == undefined) {
             cMap.set(s, 0);
           } else if (cnt == 12) {
             cMap = new Map();
             // check if s is first char of word
             if (word.length > 0) {
               // check if a/aa/e/ee/u/uu etc come in the middle of a word
-              if (s == '\u0D06') {
-                s = '\u0D3E'
-              } else if (s == '\u0D05') {
-                s = ''
-              } else if (s == '\u0D07') {
-                s = '\u0D3F'
-              } else if (s == '\u0D08') {
-                s = '\u0D40'
-              } else if (s == '\u0D09') {
-                s = '\u0D41'
-              } else if (s == '\u0D0A') {
-                s = '\u0D42'
+              if (s == "\u0D06") {
+                s = "\u0D3E";
+              } else if (s == "\u0D05") {
+                s = "";
+              } else if (s == "\u0D07") {
+                s = "\u0D3F";
+              } else if (s == "\u0D08") {
+                s = "\u0D40";
+              } else if (s == "\u0D09") {
+                s = "\u0D41";
+              } else if (s == "\u0D0A") {
+                s = "\u0D42";
               }
             }
             if (pre != s) {
               word += s;
               pre = s;
-              getPredictions(word)
+              getPredictions(word);
               // set textarea text to str + word
-              document.getElementById('w3').value = str.join(" ") + word;
+              document.getElementById("w3").value = str.join(" ") + word;
               // set cursor to end of text
-              end = document.getElementById('w3').value.length;
-              document.getElementById('w3').setSelectionRange(end, end);
-              document.getElementById('w3').focus();
+              end = document.getElementById("w3").value.length;
+              document.getElementById("w3").setSelectionRange(end, end);
+              document.getElementById("w3").focus();
             }
           } else {
             cMap.set(s, cnt + 1);
@@ -1332,7 +1418,7 @@ class="anim" style="min-height: 480px; min-width: 640px;">
       function removeBtns() {
         var chils = document.getElementById("auto");
         while (chils.firstChild) {
-          chils.removeChild(chils.lastChild)
+          chils.removeChild(chils.lastChild);
         }
       }
 
@@ -1341,72 +1427,72 @@ class="anim" style="min-height: 480px; min-width: 640px;">
         var chils = document.getElementById("auto");
         for (var i = 0; i < names.length; i++) {
           // create buttons for each prediction in array
-          var btn=document.createElement("button");
-          btn.className = "autoButton"
+          var btn = document.createElement("button");
+          btn.className = "autoButton";
           btn.style.margin = "10px";
-          btn.innerHTML=names[i];
+          btn.innerHTML = names[i];
           chils.appendChild(btn);
         }
         // get all auto complete buttons
-        var buttons = document.querySelectorAll('.autoButton');
+        var buttons = document.querySelectorAll(".autoButton");
         // add click listeners for each button
-        buttons.forEach(function(el) {
-          el.addEventListener('click', onClick, false);
-        })
+        buttons.forEach(function (el) {
+          el.addEventListener("click", onClick, false);
+        });
 
         function onClick(e) {
           var button = e.currentTarget;
           // push buttons text into str
           str.push(button.innerText);
           // reset word
-          word = ''
+          word = "";
           // remove all prediction buttons
           removeBtns();
         }
       }
 
       // clear all button
-      document.getElementById('clearall').onclick = function() {
+      document.getElementById("clearall").onclick = function () {
         // clear textarea
-        document.getElementById('w3').value = ''
+        document.getElementById("w3").value = "";
         // reset variables
-        str = []
-        pre = ''
-        word = ''
-      }
+        str = [];
+        pre = "";
+        word = "";
+      };
 
       // Start/Stop button
-      document.getElementById('startstop').onclick = function() {
-        if (document.getElementById('startstop').innerHTML == "Stop") {
-          document.getElementById('startstop').innerHTML = "Stopping..."
+      document.getElementById("startstop").onclick = function () {
+        if (document.getElementById("startstop").innerHTML == "Stop") {
+          document.getElementById("startstop").innerHTML = "Stopping...";
           eel.stop();
-        } else if (document.getElementById('startstop').innerHTML == "Start") {
-          document.getElementById('startstop').innerHTML = "Starting..."
+        } else if (document.getElementById("startstop").innerHTML == "Start") {
+          document.getElementById("startstop").innerHTML = "Starting...";
           eel.waitForStart();
         }
-      }
+      };
 
       // searchBar
-      document.getElementById('searchbar').onkeyup = function() {
-        var txt = document.getElementById('searchbar').value;
+      document.getElementById("searchbar").onkeyup = function () {
+        var txt = document.getElementById("searchbar").value;
         var collection = document.getElementsByClassName("video anim");
         if (txt == "") {
           for (let index = 0; index < collection.length; index++) {
-            collection[index].style.display = 'block';
+            collection[index].style.display = "block";
           }
         } else {
           for (let index = 0; index < collection.length; index++) {
-            var child = collection[index].children[2]
-            var iTxt = child.innerHTML
-            iTxt = iTxt.substring(iTxt.indexOf('[') + 1, iTxt.indexOf(']'))
+            var child = collection[index].children[2];
+            var iTxt = child.innerHTML;
+            iTxt = iTxt.substring(iTxt.indexOf("[") + 1, iTxt.indexOf("]"));
             if (iTxt.includes(txt)) {
-              collection[index].style.display = 'block';
+              collection[index].style.display = "block";
             } else {
-              collection[index].style.display = 'none';
+              collection[index].style.display = "none";
             }
           }
         }
-      }
+      };
 
       // Send request to Google Transliteration API to obtain word predictions
       // async function doRequest(text) {
@@ -1427,25 +1513,28 @@ class="anim" style="min-height: 480px; min-width: 640px;">
       eel.expose(print_image);
       // obtain base64 image string as json
       function print_image(x) {
-        var s = JSON.parse(x)
-        s = "data:image/jpg;base64," + s.image
-        document.getElementById('wimg').src = s;
+        var s = JSON.parse(x);
+        s = "data:image/jpg;base64," + s.image;
+        document.getElementById("wimg").src = s;
       }
 
       // Expose this function to Python
       eel.expose(startStop);
       // obtain base64 image string as json
       function startStop() {
-        if (document.getElementById('startstop').innerHTML == "Stopping...") {
-          document.getElementById('w3').value = ''
+        if (document.getElementById("startstop").innerHTML == "Stopping...") {
+          document.getElementById("w3").value = "";
           // reset variables
-          str = []
-          pre = ''
-          word = ''
-          document.getElementById('wimg').src = "https://media4.giphy.com/media/xTkcEQACH24SMPxIQg/giphy.gif";
-          document.getElementById('startstop').innerHTML = "Start"
-        } else if (document.getElementById('startstop').innerHTML == "Starting...") {
-          document.getElementById('startstop').innerHTML = "Stop"
+          str = [];
+          pre = "";
+          word = "";
+          document.getElementById("wimg").src =
+            "https://media4.giphy.com/media/xTkcEQACH24SMPxIQg/giphy.gif";
+          document.getElementById("startstop").innerHTML = "Start";
+        } else if (
+          document.getElementById("startstop").innerHTML == "Starting..."
+        ) {
+          document.getElementById("startstop").innerHTML = "Stop";
         }
       }
     </script>
